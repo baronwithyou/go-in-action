@@ -13,5 +13,5 @@ func init() {
 }
 
 func (d defaultMatcher) Search(feed *Feed, searchTerm string) ([]*Result, error) {
-	return []*Result{{Field: "fuck", Content: "you"}}, nil
+	return []*Result{}, nil
 }

@@ -18,7 +18,10 @@ type Feed struct {
 }
 
 func RetrieveFeeds() ([]*Feed, error) {
-	file, err := os.Open("/Users/baronwithyou/go/src/github.com/baronwithyou/go-in-action/chapter2/data/data.json")
+	filename, _ := os.Getwd()
+	filename += "/data/data.json"
+
+	file, err := os.Open(filename)
 	if err != nil {
 		return nil, err
 	}
