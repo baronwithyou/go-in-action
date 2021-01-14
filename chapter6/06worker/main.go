@@ -1,14 +1,14 @@
 package main
 
 import (
-	"sync"
 	"fmt"
+	"sync"
 	"time"
 )
 
 var (
-	wg sync.WaitGroup
-	taskNum = 10
+	wg        sync.WaitGroup
+	taskNum   = 10
 	workerNum = 4
 )
 
@@ -34,7 +34,7 @@ func main() {
 func worker(tasks chan int, id int) {
 	defer wg.Done()
 	for {
-		task, ok := <- tasks
+		task, ok := <-tasks
 		if !ok {
 			fmt.Printf("Worker %d done all the tasks\n", id)
 			return
