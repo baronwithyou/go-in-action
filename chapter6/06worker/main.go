@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"sync"
 	"time"
 )
@@ -11,6 +12,10 @@ var (
 	taskNum   = 10
 	workerNum = 4
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func main() {
 	tasks := make(chan int, taskNum)
@@ -40,7 +45,7 @@ func worker(tasks chan int, id int) {
 			return
 		}
 
-		time.Sleep(time.Millisecond * 200)
+		time.Sleep(time.Millisecond * time.Duration(rand.Int63n(100)))
 
 		fmt.Printf("Worker %d done task %d\n", id, task)
 	}

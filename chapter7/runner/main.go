@@ -3,8 +3,7 @@ package main
 import (
 	"fmt"
 	"time"
-
-	runner "github.com/baronwithyou/go-in-action/chapter7/runner"
+	//runner "github.com/baronwithyou/go-in-action/chapter7/runner"
 )
 
 var (
@@ -12,7 +11,7 @@ var (
 )
 
 func main() {
-	r := runner.New(d)
+	r := New(d)
 
 	r.Add(createTask(), createTask(), createTask())
 
@@ -30,6 +29,6 @@ func task(i int) {
 	fmt.Printf("task %d done\n", i)
 }
 
-func createTask() runner.Task {
+func createTask() Task {
 	return task
 }
