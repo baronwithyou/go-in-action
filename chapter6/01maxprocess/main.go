@@ -8,6 +8,7 @@ import (
 
 func main() {
 	// 指定一个线程，执行两个goroutine并查看结果
+	// 从这个实验可以看出只使用一个逻辑调度器的时候，主线程就是当前唯一的线程，他会阻塞所有需要运行的goroutine
 
 	runtime.GOMAXPROCS(1)
 
@@ -35,6 +36,12 @@ func main() {
 			fmt.Println()
 		}
 	}()
+
+	fmt.Println("Waiting to finish")
+	for i := 0; i < 10; i++ {
+		fmt.Printf("%d", i)
+	}
+	fmt.Println()
 
 	wg.Wait()
 }

@@ -1,21 +1,16 @@
 package main
 
-
 import (
-	"sync"
-	"runtime"
 	"fmt"
+	"runtime"
+	"sync"
 )
 
 var wg sync.WaitGroup
 
 func main() {
 	// 设置一个线程，运行两个goroutine
-
-	fmt.Println(runtime.NumCPU())
-	return
 	runtime.GOMAXPROCS(1)
-
 
 	wg.Add(2)
 
