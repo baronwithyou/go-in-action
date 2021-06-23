@@ -2,43 +2,16 @@ package main
 
 import (
 	"fmt"
-	"sync"
+	"github.com/baronwithyou/go-in-action/chapter6/05baton/runner"
 )
 
-var (
-	wg sync.WaitGroup
-)
 
+// 当调用同个包的方法，运行时需要编译调用的方法（go run *.go）
 func main() {
+	runner.Run()
 
-	baton := make(chan int)
+	fmt.Println()
 
-	wg.Add(1)
-
-	go Runner(baton)
-
-	baton <- 1
-
-	wg.Wait()
+	runner.Run2()
 }
 
-func Runner(baton chan int) {
-	defer wg.Done()
-
-	runner := <- baton
-
-	fmt.Printf("Runner %d running\n", runner)
-
-	if runner == 4 {
-		fmt.Printf("Runner %d finished, Race Over\n", runner)
-		close(baton)
-		return
-	}
-
-	// 启动线程必须在写入通道之前，因为该通道是没有缓冲区的
-	wg.Add(1)
-	go Runner(baton)
-
-	runner++
-	baton<-runner
-}

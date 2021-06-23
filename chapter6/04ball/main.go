@@ -4,11 +4,19 @@ import (
 	"sync"
 	"math/rand"
 	"fmt"
+	"time"
 )
+
+// 这个例子不是很好，没有很好的解释channel的常用场景
 
 var (
 	wg sync.WaitGroup
 )
+
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func main() {
 	wg.Add(2)
